@@ -1,7 +1,7 @@
 /** @type {import("socket.io-client").io} */
 var io;
 
-const socket = io("ws://localhost:8000");
+const socket = io("ws://localhost:8090");
 
 function evtypelog(event) {
     console.log(event.type)
