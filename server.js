@@ -41,6 +41,6 @@ io.on("message", (ctx, query) => {
     })
 })
 
-app.listen(8000)
+app.listen(8090)
 
-open("http://localhost:8000", {app: {name: open.apps.chrome}});
+open("http://localhost:8090", {app: {name: open.apps.chrome}});
