@@ -3,6 +3,7 @@
 const Koa = require("koa");
 const IO = require('koa-socket-2');
 const WebSocket = require("ws");
+const open = require("open");
 const fetch = require("node-fetch").default
 
 const apikey = require("./apiKey.json").apiKey;
@@ -41,3 +42,5 @@ io.on("message", (ctx, query) => {
 })
 
 app.listen(8000)
+
+open("http://localhost:8000", {app: {name: open.apps.chrome}});

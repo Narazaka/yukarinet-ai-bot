@@ -15,6 +15,7 @@
     "koa-socket-2": "^2.0.0",
     "koa-static": "^5.0.0",
     "node-fetch": "^2.6.1",
+    "open": "^8.0.2",
     "socket.io": "^3.1.2",
     "socket.io-client": "^3.1.2",
     "ws": "^7.4.3"
