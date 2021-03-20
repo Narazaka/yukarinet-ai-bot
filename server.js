@@ -4,9 +4,8 @@ const Koa = require("koa");
 const IO = require('koa-socket-2');
 const WebSocket = require("ws");
 const open = require("open");
-const fetch = require("node-fetch").default
 
-const apikey = require("./apiKey.json").apiKey;
+const reply = require("./reply");
 const port = 49513;
 
 const app = new Koa();
@@ -17,26 +16,17 @@ const wss = new WebSocket(`ws://localhost:${port}`)
 
 app.use(require("koa-static")("."))
 
-const base = "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk";
 io.on("message", (ctx, query) => {
     console.log(query)
-    const body = new URLSearchParams();
-    body.set("apikey", apikey)
-    body.set("query", query)
-    fetch(base, {
-        method: "POST",
-        body,
-    }).then(async res => {
-        const {status, message, results } = await res.json()
-        console.log(status, message, results)
-        if (!results) return;
-        const response = results[0].reply
+    reply(query).then(result => {
+        if (!result) return;
+        console.log(result.message, result.perplexity, result.reply, result.original)
+        if (!result.reply) return;
         /** @type {import("socket.io").Socket} */
         const socket = ctx.socket
-        socket.send(response)
-        wss.send(`0:${response}`)
-    },
-    err => {
+        socket.send(result.reply)
+        wss.send(`0:${result.reply}`)
+    }, err => {
         console.log(err)
     })
 })

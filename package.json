@@ -19,5 +19,11 @@
     "socket.io": "^3.1.2",
     "socket.io-client": "^3.1.2",
     "ws": "^7.4.3"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.1",
+    "@types/koa-static": "^4.0.1",
+    "@types/node-fetch": "^2.5.8",
+    "@types/ws": "^7.4.0"
   }
 }
