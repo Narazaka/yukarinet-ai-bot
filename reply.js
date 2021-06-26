@@ -23,7 +23,17 @@ module.exports = async function reply(query) {
             perplexity: 0,
         }
     }
-    return replyAI(query);
+    if (!/^(?:..?)ちゃん/.test(query)) {
+        return {
+            status: 0,
+            message: "ok",
+            results: [],
+            reply: "",
+            original: "invalid",
+            perplexity: 0,
+        }
+    }
+    return replyAI(query.replace(/^(?:..?)ちゃん/, ""));
 }
 
 /**
